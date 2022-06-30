@@ -1,6 +1,10 @@
 // GET request for signup
 exports.auth_signup_get = function (req, res) {
-  res.send('NOT IMPLEMENTED: SIGNUP GET');
+  if (res.locals.currentUser) {
+    // Already logged in
+    res.redirect('/');
+  }
+  res.send({ title: 'Signup' });
 };
 
 // POST request for signup
