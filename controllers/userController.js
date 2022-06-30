@@ -38,7 +38,17 @@ exports.user_detail = function (req, res, next) {
 
 // Display list of users
 exports.user_list = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER LIST');
+  User.find({}, 'username join_date member_level')
+    .sort({ join_date: 1 })
+    .exec((err, userList) => {
+      if (err) {
+        return next(err);
+      }
+      res.send({
+        title: 'user_list',
+        user_list: userList,
+      });
+    });
 };
 
 // GET for creating User
