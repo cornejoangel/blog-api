@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState } from 'react';
 
 const App = () => {
   const [path, setPath] = useState("/api");
-  const [data, setData] = useState('nothing yet');
+  const [data, setData] = useState({ data: ""});
 
   const updatePath = (newPath) => {
     setPath(newPath);
