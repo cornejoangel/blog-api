@@ -32,11 +32,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/', authRouter);
-app.use('/users', usersRouter);
-app.use('/posts', postsRouter);
-app.use('/comments', commentsRouter);
+app.use('/api', indexRouter);
+app.use('/api', authRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/comments', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

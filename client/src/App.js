@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [path, setPath] = useState("/api");
+  const [data, setData] = useState('nothing yet');
+
+  const updatePath = (newPath) => {
+    setPath(newPath);
+  }
+
+  const getData = () => {
+    fetch(path)
+      .then(result => result.json())
+      .then(body => setData(body))
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Blog</h1>
+      <input value={path} type="text" onChange={(e) => updatePath(e.target.value)} />
+      <button onClick={getData}>Get path data</button>
+      <div>
+        path: {path}
+      </div>
+      <h2>Data:</h2>
+      <div>
+        {Object.entries(data).map(([key, value]) =>
+          <p>{key} : {value} </p>
+        )}
+      </div>
+
     </div>
-  );
-}
+  )
+};
 
 export default App;
