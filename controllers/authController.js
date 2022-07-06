@@ -16,7 +16,7 @@ exports.auth_signup_get = function (req, res) {
 exports.auth_signup_post = [
   // Validate and sanitize fields
   body('username', 'Username required').trim().isLength({ min: 1 }).escape(),
-  body('password', 'Password required (minimum length: 4')
+  body('password', 'Password required (minimum length: 4)')
     .trim()
     .isLength({ min: 4 })
     .escape(),
@@ -60,7 +60,7 @@ exports.auth_signup_post = [
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.json({ message: 'success' });
       });
     });
   },

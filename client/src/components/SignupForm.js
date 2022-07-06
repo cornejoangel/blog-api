@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const SignupForm = () => {
-  const [userName, setUserName] = useState('');
+const SignupForm = (props) => {
+  const { signupPost } = props;
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const [confirmation, setConfirmation] = useState('');
 
   const handleChange = (e) => {
     if (e.target.name === 'username') {
-      setUserName(e.target.value);
+      setUsername(e.target.value);
     } else if (e.target.name === 'password') {
       setPassword(e.target.value);
-    } else if (e.target.name === 'confirm') {
-      setConfirm(e.target.value);
+    } else if (e.target.name === 'confirmation') {
+      setConfirmation(e.target.value);
     }
   };
 
   return (
-    <form>
+    <form onSubmit={(e) => signupPost(e, username, password, confirmation)}>
       <label htmlFor="username">Username:</label>
       <input
         type="text"
         name="username"
-        value={userName}
+        value={username}
         onChange={handleChange}
       />
       <label htmlFor="password">Password:</label>
@@ -31,16 +33,20 @@ const SignupForm = () => {
         value={password}
         onChange={handleChange}
       />
-      <label htmlFor="confirm">Confirm Password:</label>
+      <label htmlFor="confirmation">Confirm Password:</label>
       <input
         type="password"
-        name="confirm"
-        value={confirm}
+        name="confirmation"
+        value={confirmation}
         onChange={handleChange}
       />
       <button type="submit">Signup</button>
     </form>
   );
+};
+
+SignupForm.propTypes = {
+  signupPost: PropTypes.func,
 };
 
 export default SignupForm;
