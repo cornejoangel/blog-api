@@ -38,14 +38,14 @@ exports.user_detail = function (req, res, next) {
 
 // Display list of users
 exports.user_list = function (req, res, next) {
-  User.find({}, 'username join_date member_level')
+  User.find({}, 'username join_date')
     .sort({ join_date: 1 })
     .exec((err, userList) => {
       if (err) {
         return next(err);
       }
       res.send({
-        title: 'user_list',
+        title: 'User List',
         user_list: userList,
       });
     });
