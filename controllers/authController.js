@@ -26,6 +26,16 @@ passport.use(
   })
 );
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
 // GET request for signup
 exports.auth_signup_get = function (req, res) {
   if (res.locals.currentUser) {
