@@ -1,7 +1,30 @@
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/user');
 const userController = require('./userController');
+
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username' });
+      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // passwords match! log user in
+          return done(null, user);
+        }
+        // passwords do not match!
+        return done(null, false, { message: 'Incorrect password' });
+      });
+    });
+  })
+);
 
 // GET request for signup
 exports.auth_signup_get = function (req, res) {
@@ -68,13 +91,18 @@ exports.auth_signup_post = [
 
 // GET request for login
 exports.auth_login_get = function (req, res) {
-  res.send('NOT IMPLEMENTED: LOGIN GET');
+  if (res.locals.currentUser) {
+    // Already logged in
+    res.json({ title: 'Login', loggedIn: true });
+  }
+  res.json({ title: 'Login' });
 };
 
 // POST request for login
-exports.auth_login_post = function (req, res) {
-  res.send('NOT IMPLEMENTED: LOGIN POST');
-};
+exports.auth_login_post = passport.authenticate('local', {
+  successMessage: 'success',
+  failureMessage: 'failure',
+});
 
 // GET request for logout
 exports.auth_logout_get = function (req, res) {
