@@ -39,7 +39,7 @@ const App = () => {
   return (
     <div className="app">
       <h1>{data.title}</h1>
-      <Navbar />
+      <Navbar loggedIn={loggedIn} />
       <Routes>
         {/* <Route path="/" element={<App />} /> */}
         <Route path="/signup" element={<Signup />} />
