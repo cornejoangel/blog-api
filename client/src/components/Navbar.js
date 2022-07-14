@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Navbar = (props) => {
-  const { loggedIn } = props;
+  const { loggedIn, logout } = props;
 
   return (
     <nav>
@@ -24,12 +24,18 @@ const Navbar = (props) => {
           </Link>
         </ul>
       )}
+      {loggedIn && (
+        <button type="button" onClick={(e) => logout(e)}>
+          Log out
+        </button>
+      )}
     </nav>
   );
 };
 
 Navbar.propTypes = {
   loggedIn: PropTypes.bool,
+  logout: PropTypes.func,
 };
 
 export default Navbar;

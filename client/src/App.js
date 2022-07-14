@@ -27,9 +27,16 @@ const App = () => {
     navigate('/');
   };
 
+  const logout = async (e) => {
+    e.preventDefault();
+    const logoutResponse = await fetch('/api/logout');
+    const logoutData = await logoutResponse.json();
+    setLoggedIn(logoutData.loggedIn);
+  };
+
   return (
     <div className="app">
-      <Navbar loggedIn={loggedIn} />
+      <Navbar loggedIn={loggedIn} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
