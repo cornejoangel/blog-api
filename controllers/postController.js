@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 // Display detail page for a post
 exports.post_detail = function (req, res, next) {
@@ -7,7 +8,17 @@ exports.post_detail = function (req, res, next) {
 
 // Display list of posts
 exports.post_list = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: POST LIST');
+  Post.find({}, 'title user time_stamp')
+    .sort({ time_stamp: 1 })
+    .exec((err, postList) => {
+      if (err) {
+        return next(err);
+      }
+      res.json({
+        title: 'Post List',
+        postList,
+      });
+    });
 };
 
 // GET for creating Post
