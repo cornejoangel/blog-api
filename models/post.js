@@ -9,6 +9,8 @@ const PostSchema = new Schema({
   time_stamp: { type: Date, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   public: { type: Boolean, required: true },
+  edited: { type: Boolean, required: true },
+  edited_time: { type: Date },
 });
 
 PostSchema.virtual('url').get(function () {
