@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import Home from './Home';
 import Signup from './Signup';
 import Login from './Login';
 import Users from './Users';
 import Navbar from './components/Navbar';
 
 const App = () => {
-  const [data, setData] = useState({});
   const [loginErrors, setLoginErrors] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -24,24 +24,14 @@ const App = () => {
       setLoginErrors(postData.errors);
       return;
     }
-    navigate('/login');
+    navigate('/');
   };
-
-  const fetchData = async () => {
-    const response = await fetch('/api');
-    const responseData = await response.json();
-    setData(responseData);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className="app">
-      <h1>{data.title}</h1>
       <Navbar loggedIn={loggedIn} />
       <Routes>
-        {/* <Route path="/" element={<App />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/login"
