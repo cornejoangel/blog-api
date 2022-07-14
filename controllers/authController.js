@@ -115,8 +115,13 @@ exports.auth_login_post = passport.authenticate('local', {
 });
 
 // GET request for logout
-exports.auth_logout_get = function (req, res) {
-  res.send('NOT IMPLEMENTED: LOGOUT GET');
+exports.auth_logout_get = function (req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/api');
+  });
 };
 
 exports.auth_login_status_get = function (req, res) {
