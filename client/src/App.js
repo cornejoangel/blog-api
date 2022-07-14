@@ -11,6 +11,15 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  const fetchLoginStatus = async () => {
+    const response = await fetch('/api/loginstatus');
+    const responseData = await response.json();
+    setLoggedIn(responseData.loggedIn);
+  };
+  useEffect(() => {
+    fetchLoginStatus();
+  }, []);
+
   const loginPost = async (e, username, password) => {
     e.preventDefault();
     const postResponse = await fetch('/api/login', {
