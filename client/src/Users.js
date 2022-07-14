@@ -8,7 +8,6 @@ const Users = () => {
   const fetchData = async () => {
     const response = await fetch('/api/users');
     const responseData = await response.json();
-    console.log(responseData.user_list);
     setData(responseData);
     setUsers(responseData.user_list);
   };
