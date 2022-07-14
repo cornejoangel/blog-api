@@ -118,3 +118,11 @@ exports.auth_login_post = passport.authenticate('local', {
 exports.auth_logout_get = function (req, res) {
   res.send('NOT IMPLEMENTED: LOGOUT GET');
 };
+
+exports.auth_login_status_get = function (req, res) {
+  if (req.user) {
+    return res.json({ loggedIn: true });
+  }
+  console.log(true);
+  res.json({ loggedIn: false });
+};
