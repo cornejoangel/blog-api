@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import App from './App';
 import Signup from './Signup';
 import Login from './Login';
@@ -7,13 +8,7 @@ import Navbar from './components/Navbar';
 
 const Router = () => (
   <BrowserRouter>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/users" element={<Users />} />
-    </Routes>
+    <App />
   </BrowserRouter>
 );
 

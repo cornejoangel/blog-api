@@ -101,17 +101,17 @@ exports.auth_signup_post = [
 
 // GET request for login
 exports.auth_login_get = function (req, res) {
-  if (res.locals.currentUser) {
+  if (req.user) {
     // Already logged in
-    res.json({ title: 'Login', loggedIn: true });
+    return res.json({ title: 'Login', loggedIn: true });
   }
-  res.json({ title: 'Login' });
+  return res.json({ title: 'Login', loggedIn: false });
 };
 
 // POST request for login
 exports.auth_login_post = passport.authenticate('local', {
-  successMessage: 'success',
-  failureMessage: 'failure',
+  successRedirect: '/api/login',
+  failureRedirect: '/api/login',
 });
 
 // GET request for logout
