@@ -126,8 +126,7 @@ exports.auth_logout_get = function (req, res, next) {
 
 exports.auth_login_status_get = function (req, res) {
   if (req.user) {
-    return res.json({ loggedIn: true });
+    return res.json({ loggedIn: true, user: req.user });
   }
-  console.log(true);
-  res.json({ loggedIn: false });
+  res.json({ loggedIn: false, user: null });
 };
