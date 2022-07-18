@@ -9,12 +9,14 @@ import Navbar from './components/Navbar';
 const App = () => {
   const [loginErrors, setLoginErrors] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
   const fetchLoginStatus = async () => {
     const response = await fetch('/api/loginstatus');
     const responseData = await response.json();
     setLoggedIn(responseData.loggedIn);
+    setCurrentUser(responseData.user);
   };
   useEffect(() => {
     fetchLoginStatus();
@@ -33,6 +35,7 @@ const App = () => {
       setLoginErrors(postData.errors);
       return;
     }
+    fetchLoginStatus();
     navigate('/');
   };
 
@@ -41,13 +44,14 @@ const App = () => {
     const logoutResponse = await fetch('/api/logout');
     const logoutData = await logoutResponse.json();
     setLoggedIn(logoutData.loggedIn);
+    fetchLoginStatus();
   };
 
   return (
     <div className="app">
       <Navbar loggedIn={loggedIn} logout={logout} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={currentUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/login"
