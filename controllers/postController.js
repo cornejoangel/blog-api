@@ -10,7 +10,7 @@ exports.post_detail = function (req, res, next) {
 // Display list of posts
 exports.post_list = function (req, res, next) {
   Post.find({}, 'title body user time_stamp hidden edited')
-    .sort({ time_stamp: 1 })
+    .sort({ time_stamp: -1 })
     .populate('user')
     .exec((err, postList) => {
       if (err) {
