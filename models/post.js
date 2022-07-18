@@ -4,7 +4,7 @@ const { DateTime } = require('luxon');
 const { Schema } = mongoose;
 
 const PostSchema = new Schema({
-  title: { type: String, required: true, maxLength: 100 },
+  title: { type: String, maxLength: 100 },
   body: { type: String, required: true, maxLength: 1024 },
   time_stamp: { type: Date, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
