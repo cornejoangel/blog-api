@@ -23,7 +23,15 @@ const Home = (props) => {
   useEffect(() => {
     fetchData();
     fetchPosts();
-  }, []);
+  }, [creatingPost]);
+
+  const togglePosting = () => {
+    if (creatingPost) {
+      setCreatingPost(false);
+      return;
+    }
+    setCreatingPost(true);
+  };
 
   const createPost = async (e, title, body, hidden) => {
     e.preventDefault();
@@ -36,17 +44,7 @@ const Home = (props) => {
     if (postData.errors) {
       setPostErrors(postData.errors);
     }
-    if (postData.customError) {
-      setPostErrors(postData.customError);
-    }
-  };
-
-  const togglePosting = (e) => {
-    if (creatingPost) {
-      setCreatingPost(false);
-      return;
-    }
-    setCreatingPost(true);
+    togglePosting();
   };
 
   return (
