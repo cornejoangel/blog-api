@@ -7,21 +7,21 @@ const Navbar = (props) => {
   return (
     <nav>
       <ul className="links">
-        <Link to="/">
-          <li>Home</li>
-        </Link>
-        <Link to="/users">
-          <li>User List</li>
-        </Link>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/users">User List</Link>
+        </li>
       </ul>
       {!loggedIn && (
         <ul>
-          <Link to="/signup">
-            <li>Signup</li>
-          </Link>
-          <Link to="/login">
-            <li>Login</li>
-          </Link>
+          <li>
+            <Link to="/signup">Signup</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
       )}
       {loggedIn && (
