@@ -11,6 +11,7 @@ const PostSchema = new Schema({
   hidden: { type: Boolean, required: true },
   edited: { type: Boolean, required: true },
   edited_time: { type: Date },
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 PostSchema.virtual('url').get(function () {
