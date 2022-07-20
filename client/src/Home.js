@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import PostForm from './components/PostForm';
+import Post from './components/Post';
 
 const Home = (props) => {
   const { user } = props;
@@ -67,13 +69,8 @@ const Home = (props) => {
         <ul>
           {posts.map((post) => (
             <li key={uniqid()}>
-              <h2>
-                {post.title} - {post.time_stamp_formatted}
-              </h2>
-              <p>{post.body}</p>
-              <div>
-                - {post.user.username} - {post.hidden} - {post.edited}
-              </div>
+              <Post post={post} />
+              <Link to={`/posts/${post._id}`}>View Post</Link>
             </li>
           ))}
         </ul>

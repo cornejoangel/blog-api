@@ -4,14 +4,28 @@ const User = require('../models/user');
 
 // Display detail page for a post
 exports.post_detail = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: POST DETAIL');
+  Post.findById(req.params.id)
+    .populate('user')
+    .populate('comments')
+    .exec((err, post) => {
+      if (err) {
+        return next(err);
+      }
+      if (post == null) {
+        const err = new Error('Post not found');
+        err.status = 404;
+        return next(err);
+      }
+      res.json({ title: 'Post Detail', post });
+    });
 };
 
 // Display list of posts
 exports.post_list = function (req, res, next) {
-  Post.find({}, 'title body user time_stamp hidden edited')
+  Post.find({})
     .sort({ time_stamp: -1 })
     .populate('user')
+    .populate('comments')
     .exec((err, postList) => {
       if (err) {
         return next(err);
