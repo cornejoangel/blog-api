@@ -5,12 +5,6 @@ const router = express.Router();
 // Require controller modules.
 const userController = require('../controllers/userController');
 
-// GET request for creating a User. NOTE This must come before routes that display User (uses id).
-router.get('/create', userController.user_create_get);
-
-// POST request for creating User.
-router.post('/create', userController.user_create_post);
-
 // GET request to delete User.
 router.get('/:id/delete', userController.user_delete_get);
 

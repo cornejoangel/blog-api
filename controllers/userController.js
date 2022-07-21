@@ -51,16 +51,6 @@ exports.user_list = function (req, res, next) {
     });
 };
 
-// GET for creating User
-exports.user_create_get = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER CREATE GET');
-};
-
-// POST for creating User
-exports.user_create_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER CREATE POST');
-};
-
 // GET for deleting User
 exports.user_delete_get = function (req, res, next) {
   res.send('NOT IMPLEMENTED: USER DELETE GET');
