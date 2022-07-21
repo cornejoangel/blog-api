@@ -57,9 +57,7 @@ const Home = (props) => {
           Create Post
         </button>
       )}
-      {user !== null && creatingPost && (
-        <PostForm createPost={createPost} username="test" />
-      )}
+      {user !== null && creatingPost && <PostForm createPost={createPost} />}
       {user !== null && creatingPost && (
         <button type="button" onClick={togglePosting}>
           Cancel Post
