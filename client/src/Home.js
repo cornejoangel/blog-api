@@ -40,7 +40,7 @@ const Home = (props) => {
     const postResponse = await fetch('/api/posts/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user, title, body, hidden }),
+      body: JSON.stringify({ title, body, hidden }),
     });
     const postData = await postResponse.json();
     if (postData.errors) {

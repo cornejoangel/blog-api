@@ -33,19 +33,16 @@ const PostDetail = (props) => {
 
   const createComment = async (e, body) => {
     e.preventDefault();
-    console.log('create comment');
     const postResponse = await fetch('/api/comments/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        user,
         body,
         parentType: 'post',
         parentId: post._id,
       }),
     });
     const postData = await postResponse.json();
-    console.log(postData);
     if (postData.errors) {
       setCommentErrors(postData.errors);
     }
