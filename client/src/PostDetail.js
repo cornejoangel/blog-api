@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
 import CommentForm from './components/CommentForm';
+import Comment from './components/Comment';
 
 const PostDetail = (props) => {
   const { user } = props;
@@ -58,7 +59,7 @@ const PostDetail = (props) => {
         <ul>
           {post.comments.map((comment) => (
             <li key={uniqid()}>
-              {comment.body} - {comment.user.username}
+              <Comment comment={comment} />
             </li>
           ))}
         </ul>
