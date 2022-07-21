@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
+import { Link } from 'react-router-dom';
 
 const Users = () => {
   const [data, setData] = useState({});
@@ -21,7 +22,8 @@ const Users = () => {
       <ul>
         {users.map((user) => (
           <li key={uniqid()}>
-            {user.username} - {user.join_date_formatted}
+            <Link to={`/users/${user._id}`}>{user.username}</Link> -{' '}
+            {user.join_date_formatted}
           </li>
         ))}
       </ul>
