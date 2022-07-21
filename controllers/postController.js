@@ -6,7 +6,10 @@ const User = require('../models/user');
 exports.post_detail = function (req, res, next) {
   Post.findById(req.params.id)
     .populate('user')
-    .populate('comments')
+    .populate({
+      path: 'comments',
+      populate: { path: 'user' },
+    })
     .exec((err, post) => {
       if (err) {
         return next(err);
