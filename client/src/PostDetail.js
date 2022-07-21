@@ -11,6 +11,7 @@ const PostDetail = (props) => {
   const [post, setPost] = useState(null);
   const [creatingComment, setCreatingComment] = useState(false);
   const [commentErrors, setCommentErrors] = useState([]);
+  const [commentCheck, setCommentCheck] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +20,8 @@ const PostDetail = (props) => {
       setPost(responseData.post);
     };
     fetchData();
-  }, [id]);
+    setCommentCheck(false);
+  }, [id, commentCheck]);
 
   const toggleCommenting = () => {
     if (creatingComment) {
@@ -48,6 +50,7 @@ const PostDetail = (props) => {
       setCommentErrors(postData.errors);
     }
     toggleCommenting();
+    setCommentCheck(true);
   };
 
   return (
