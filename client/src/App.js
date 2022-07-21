@@ -46,6 +46,7 @@ const App = () => {
     const logoutData = await logoutResponse.json();
     setLoggedIn(logoutData.loggedIn);
     fetchLoginStatus();
+    navigate('/');
   };
 
   return (
@@ -65,7 +66,7 @@ const App = () => {
           }
         />
         <Route path="/users" element={<Users />} />
-        <Route path="/posts/:id" element={<PostDetail />} />
+        <Route path="/posts/:id" element={<PostDetail user={currentUser} />} />
       </Routes>
     </div>
   );
