@@ -51,11 +51,6 @@ exports.user_list = function (req, res, next) {
     });
 };
 
-// GET for deleting User
-exports.user_delete_get = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER DELETE GET');
-};
-
 // POST for deleting User
 exports.user_delete_post = function (req, res, next) {
   async.parallel(

@@ -5,9 +5,6 @@ const router = express.Router();
 // Require controller modules.
 const userController = require('../controllers/userController');
 
-// GET request to delete User.
-router.get('/:id/delete', userController.user_delete_get);
-
 // POST request to delete User.
 router.post('/:id/delete', userController.user_delete_post);
 
