@@ -70,7 +70,7 @@ const App = () => {
         <Route path="/posts/:id" element={<PostDetail user={currentUser} />} />
         <Route
           path="/users/:id"
-          element={<UserDetail currentUser={currentUser} />}
+          element={<UserDetail currentUser={currentUser} logout={logout} />}
         />
       </Routes>
     </div>

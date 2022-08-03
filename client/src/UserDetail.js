@@ -1,28 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
 import Comment from './components/Comment';
 
 const UserDetail = (props) => {
-  const { currentUser } = props;
+  const { currentUser, logout } = props;
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState(null);
   const [comments, setComments] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`/api/users/${id}`);
       const responseData = await response.json();
-      console.log(responseData);
       setUser(responseData.user);
       setPosts(responseData.user_posts);
       setComments(responseData.user_comments);
     };
     fetchData();
   }, [id]);
+
+  const deleteToggle = () => {
+    if (deleting) {
+      setDeleting(false);
+      return;
+    }
+    setDeleting(true);
+  };
+
+  const deleteUser = async (e) => {
+    e.preventDefault();
+    const postResponse = await fetch(`/api/users/${id}/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userid: user._id,
+      }),
+    });
+    const postData = await postResponse.json();
+    // Logout if you were a user deleting yourself
+    if (
+      postData.success &&
+      currentUser !== null &&
+      currentUser._id === user._id
+    ) {
+      logout(e);
+    }
+    if (postData.success) {
+      navigate('/');
+    }
+  };
 
   return (
     <div>
@@ -57,12 +89,32 @@ const UserDetail = (props) => {
           </ul>
         </div>
       )}
+      {currentUser !== null && user !== null && currentUser._id === user._id && (
+        <button type="button" onClick={deleteToggle}>
+          {deleting ? 'Cancel' : 'Delete User'}
+        </button>
+      )}
+      {deleting && (
+        <div>
+          <p>
+            {posts.length > 0 || comments.length > 0
+              ? 'Please delete all posts and comments before attempting to delete this user'
+              : 'Are you sure you want to delete this user?'}
+          </p>
+          {posts.length === 0 && comments.length === 0 && (
+            <button type="button" onClick={(e) => deleteUser(e)}>
+              Delete
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
 UserDetail.propTypes = {
   currentUser: PropTypes.object,
+  logout: PropTypes.func,
 };
 
 export default UserDetail;

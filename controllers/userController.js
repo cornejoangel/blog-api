@@ -58,7 +58,36 @@ exports.user_delete_get = function (req, res, next) {
 
 // POST for deleting User
 exports.user_delete_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER DELETE POST');
+  async.parallel(
+    {
+      user(callback) {
+        User.findById(req.params.id).exec(callback);
+      },
+      user_posts(callback) {
+        Post.find({ user: req.params.id }).exec(callback);
+      },
+      user_comments(callback) {
+        Comment.find({ user: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.user_posts.length > 0 || results.user_comments.length > 0) {
+        // Cannot delete a user who has posts or comments, return
+        res.json({ error: 'User has posts or comments' });
+        return;
+      }
+      // User has no posts or comments, delete user
+      User.findByIdAndRemove(req.body.userid, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.json({ success: true });
+      });
+    }
+  );
 };
 
 // GET for updating User
