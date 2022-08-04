@@ -17,7 +17,6 @@ const UpdateUser = () => {
       const responseData = await response.json();
       setData(responseData);
       setUser(responseData.user);
-      console.log(responseData);
       if (responseData.error) {
         setLoggedIn(false);
         return;
