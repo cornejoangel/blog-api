@@ -38,9 +38,10 @@ passport.deserializeUser((id, done) => {
 
 // GET request for signup
 exports.auth_signup_get = function (req, res) {
-  if (res.locals.currentUser) {
+  if (req.user) {
     // Already logged in
-    res.redirect('/');
+    res.json({ title: 'Signup', error: 'already logged in' });
+    return;
   }
   res.send({ title: 'Signup' });
 };

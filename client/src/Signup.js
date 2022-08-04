@@ -6,12 +6,16 @@ import SignupForm from './components/SignupForm';
 const Signup = () => {
   const [data, setData] = useState({});
   const [errors, setErrors] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const fetchData = async () => {
     const response = await fetch('/api/signup');
     const responseData = await response.json();
     setData(responseData);
+    if (responseData.error) {
+      setLoggedIn(true);
+    }
   };
   useEffect(() => {
     fetchData();
@@ -35,7 +39,10 @@ const Signup = () => {
   return (
     <div className="app">
       <h1>{data.title}</h1>
-      <SignupForm signupPost={signupPost} />
+      {!loggedIn && <SignupForm submitPost={signupPost} />}
+      {loggedIn && (
+        <p>Please log out before attempting to sign up another user</p>
+      )}
       {errors.length > 0 && (
         <div>
           <h2>Errors</h2>
