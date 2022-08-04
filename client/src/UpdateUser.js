@@ -29,6 +29,17 @@ const UpdateUser = () => {
 
   const updatePost = async (e, username, password, confirmation) => {
     e.preventDefault();
+    const postResponse = await fetch(`/api/users/${id}/update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, confirmation }),
+    });
+    const postData = await postResponse.json();
+    if (postData.errors) {
+      setErrors(postData.errors);
+      return;
+    }
+    navigate(`/users/${id}`);
   };
 
   return (

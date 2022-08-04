@@ -1,4 +1,6 @@
+const bcrypt = require('bcryptjs');
 const async = require('async');
+const { body, validationResult } = require('express-validator');
 const User = require('../models/user');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
@@ -105,6 +107,55 @@ exports.user_update_get = function (req, res, next) {
 };
 
 // POST for updating User
-exports.user_update_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER UPDATE POST');
-};
+exports.user_update_post = [
+  // Validate and sanitize fields
+  body('username', 'Username required').trim().isLength({ min: 1 }).escape(),
+  body('password', 'Password required (minimum length: 4)')
+    .trim()
+    .isLength({ min: 4 })
+    .escape(),
+  body('confirmation')
+    .trim()
+    .escape()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Password confirmation does not match password');
+      }
+      return true;
+    }),
+
+  (req, res, next) => {
+    // Extract any validation errors
+    const errors = validationResult(req);
+
+    // Preserve original join date
+    const joinDate = User.findById(req.params.id).join_date;
+
+    // Encrypt the password
+    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+      if (err) {
+        return next(err);
+      }
+      const user = new User({
+        username: req.body.username,
+        password: hashedPassword,
+        join_date: joinDate,
+        _id: req.params.id,
+      });
+
+      if (!errors.isEmpty()) {
+        // There were validation errors
+        res.json({ title: 'Update User', user, errors: errors.array() });
+        return;
+      }
+
+      // No errors, update the user
+      User.findByIdAndUpdate(req.params.id, user, {}, (err, theuser) => {
+        if (err) {
+          return next(err);
+        }
+        res.json({ success: true });
+      });
+    });
+  },
+];
