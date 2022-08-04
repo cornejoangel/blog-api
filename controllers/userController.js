@@ -87,7 +87,21 @@ exports.user_delete_post = function (req, res, next) {
 
 // GET for updating User
 exports.user_update_get = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: USER UPDATE GET');
+  User.findById(req.params.id).exec((err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (req.user && String(req.user._id) === String(user._id)) {
+      // You must be logged in as the user you are trying to update
+      // TODO later you will be able to access this for other users if you are an admin
+      res.json({ title: 'Update User', user });
+      return;
+    }
+    res.json({
+      title: 'Update User',
+      error: 'Not logged in',
+    });
+  });
 };
 
 // POST for updating User

@@ -6,6 +6,7 @@ import Login from './Login';
 import Users from './Users';
 import PostDetail from './PostDetail';
 import UserDetail from './UserDetail';
+import UpdateUser from './UpdateUser';
 import Navbar from './components/Navbar';
 
 const App = () => {
@@ -71,6 +72,10 @@ const App = () => {
         <Route
           path="/users/:id"
           element={<UserDetail currentUser={currentUser} logout={logout} />}
+        />
+        <Route
+          path="/users/:id/update"
+          element={<UpdateUser currentUser={currentUser} />}
         />
       </Routes>
     </div>

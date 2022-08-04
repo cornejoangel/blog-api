@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
@@ -88,6 +88,11 @@ const UserDetail = (props) => {
             ))}
           </ul>
         </div>
+      )}
+      {currentUser !== null && user !== null && currentUser._id === user._id && (
+        <Link to={`/users/${user._id}/update`}>
+          <button type="button">Update User</button>
+        </Link>
       )}
       {currentUser !== null && user !== null && currentUser._id === user._id && (
         <button type="button" onClick={deleteToggle}>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const SignupForm = (props) => {
-  const { signupPost } = props;
+  const { submitPost, updating } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
@@ -18,7 +18,7 @@ const SignupForm = (props) => {
   };
 
   return (
-    <form onSubmit={(e) => signupPost(e, username, password, confirmation)}>
+    <form onSubmit={(e) => submitPost(e, username, password, confirmation)}>
       <label htmlFor="username">Username:</label>
       <input
         type="text"
@@ -40,13 +40,14 @@ const SignupForm = (props) => {
         value={confirmation}
         onChange={handleChange}
       />
-      <button type="submit">Signup</button>
+      <button type="submit">{updating ? 'Update' : 'Signup'}</button>
     </form>
   );
 };
 
 SignupForm.propTypes = {
-  signupPost: PropTypes.func,
+  submitPost: PropTypes.func,
+  updating: PropTypes.bool,
 };
 
 export default SignupForm;
