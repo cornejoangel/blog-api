@@ -12,6 +12,7 @@ const PostDetail = (props) => {
   const [post, setPost] = useState(null);
   const [creatingComment, setCreatingComment] = useState(false);
   const [commentErrors, setCommentErrors] = useState([]);
+  // commentCheck is a flag that triggers a fetch to refresh the comment list
   const [commentCheck, setCommentCheck] = useState(false);
 
   useEffect(() => {
