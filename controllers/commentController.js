@@ -130,7 +130,17 @@ exports.comment_delete_get = function (req, res, next) {
 
 // POST for deleting Comment
 exports.comment_delete_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: COMMENT DELETE POST');
+  Comment.findById(req.params.id).exec((err) => {
+    if (err) {
+      return next(err);
+    }
+    Comment.findByIdAndRemove(req.body.commentid, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.json({ success: true });
+    });
+  });
 };
 
 // GET for updating Comment

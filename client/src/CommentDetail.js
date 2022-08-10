@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import CommentForm from './components/CommentForm';
@@ -15,6 +15,7 @@ const CommentDetail = (props) => {
   const [commentErrors, setCommentErrors] = useState([]);
   // commentCheck is a flag that triggers a fetch to refresh the comment list
   const [commentCheck, setCommentCheck] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,6 +70,21 @@ const CommentDetail = (props) => {
     setCommentCheck(true);
   };
 
+  const deleteComment = async (e) => {
+    e.preventDefault();
+    const postResponse = await fetch(`/api/comments/${id}/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        commentid: comment._id,
+      }),
+    });
+    const postData = await postResponse.json();
+    if (postData.success) {
+      navigate('/');
+    }
+  };
+
   return (
     <div>
       {comment === null && <div>Loading...</div>}
@@ -115,6 +131,14 @@ const CommentDetail = (props) => {
         <button type="button" onClick={toggleDeleting}>
           {deleting ? 'Cancel' : 'Delete Comment'}
         </button>
+      )}
+      {deleting && (
+        <div>
+          <p>Are you sure you want to delete this comment?</p>
+          <button type="button" onClick={(e) => deleteComment(e)}>
+            Delete
+          </button>
+        </div>
       )}
     </div>
   );
