@@ -10,6 +10,8 @@ const CommentDetail = (props) => {
   const { id } = useParams();
   const [comment, setComment] = useState(null);
   const [creatingComment, setCreatingComment] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [commentErrors, setCommentErrors] = useState([]);
   // commentCheck is a flag that triggers a fetch to refresh the comment list
   const [commentCheck, setCommentCheck] = useState(false);
@@ -30,6 +32,22 @@ const CommentDetail = (props) => {
       return;
     }
     setCreatingComment(true);
+  };
+
+  const toggleEditing = () => {
+    if (editing) {
+      setEditing(false);
+      return;
+    }
+    setEditing(true);
+  };
+
+  const toggleDeleting = () => {
+    if (deleting) {
+      setDeleting(false);
+      return;
+    }
+    setDeleting(true);
   };
 
   const createComment = async (e, body) => {
@@ -87,6 +105,16 @@ const CommentDetail = (props) => {
             ))}
           </ul>
         </div>
+      )}
+      {user !== null && comment !== null && user._id === comment.user._id && (
+        <button type="button" onClick={toggleEditing}>
+          Edit Comment
+        </button>
+      )}
+      {user !== null && comment !== null && user._id === comment.user._id && (
+        <button type="button" onClick={toggleDeleting}>
+          {deleting ? 'Cancel' : 'Delete Comment'}
+        </button>
       )}
     </div>
   );
