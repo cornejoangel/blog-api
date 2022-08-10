@@ -4,7 +4,23 @@ const Post = require('../models/post');
 
 // Display detail page for a comment
 exports.comment_detail = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: COMMENT DETAIL');
+  Comment.findById(req.params.id)
+    .populate('user')
+    .populate({
+      path: 'comments',
+      populate: { path: 'user' },
+    })
+    .exec((err, comment) => {
+      if (err) {
+        return next(err);
+      }
+      if (comment == null) {
+        const err = new Error('Comment not found');
+        err.status = 404;
+        return next(err);
+      }
+      res.json({ title: 'Comment Detail', comment });
+    });
 };
 
 // Display list of comments
