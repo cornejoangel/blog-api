@@ -72,7 +72,7 @@ const PostDetail = (props) => {
         </button>
       )}
       {user !== null && creatingComment && (
-        <CommentForm createComment={createComment} />
+        <CommentForm createComment={createComment} prevBody="" />
       )}
       {user !== null && creatingComment && (
         <button type="button" onClick={toggleCommenting}>

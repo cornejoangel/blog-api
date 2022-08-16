@@ -149,6 +149,52 @@ exports.comment_update_get = function (req, res, next) {
 };
 
 // POST for updating Comment
-exports.comment_update_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: COMMENT UPDATE POST');
-};
+exports.comment_update_post = [
+  // Validate and sanitize the body field
+  body('body').trim().isLength({ min: 1, max: 1024 }).escape().unescape("'"),
+  // Process request after validation/sanitization
+  (req, res, next) => {
+    const errors = validationResult(req);
+    let commentUser = '';
+    if (req.user) {
+      commentUser = req.user._id;
+    }
+    // Get original comment to preserve time stamp and comments
+    Comment.findById(req.params.id).exec((err, originalComment) => {
+      if (err) {
+        return next(err);
+      }
+      const comment = new Comment({
+        body: req.body.body,
+        time_stamp: originalComment.time_stamp,
+        user: commentUser,
+        edited: true,
+        edited_time: new Date(),
+        comments: originalComment.comments,
+        _id: req.params.id,
+      });
+      if (!req.user) {
+        // trying to update comment while not logged in
+        res.json({ comment, errors: [{ msg: 'You must log in to comment' }] });
+        return;
+      }
+      if (!errors.isEmpty()) {
+        res.json({ comment, errors: errors.array() });
+        return;
+      }
+      // Comment is valid, now update it
+      // No need to do anything with its parent
+      Comment.findByIdAndUpdate(
+        req.params.id,
+        comment,
+        {},
+        (err, theComment) => {
+          if (err) {
+            return next(err);
+          }
+          res.json({ success: true, theComment });
+        }
+      );
+    });
+  },
+];

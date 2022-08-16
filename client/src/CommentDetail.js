@@ -70,6 +70,23 @@ const CommentDetail = (props) => {
     setCommentCheck(true);
   };
 
+  const updateComment = async (e, body) => {
+    e.preventDefault();
+    const postResponse = await fetch(`/api/comments/${id}/update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        body,
+      }),
+    });
+    const postData = await postResponse.json();
+    if (postData.errors) {
+      setCommentErrors(postData.errors);
+    }
+    toggleEditing();
+    setCommentCheck(true);
+  };
+
   const deleteComment = async (e) => {
     e.preventDefault();
     const postResponse = await fetch(`/api/comments/${id}/delete`, {
@@ -88,7 +105,10 @@ const CommentDetail = (props) => {
   return (
     <div>
       {comment === null && <div>Loading...</div>}
-      {comment !== null && <Comment comment={comment} />}
+      {comment !== null && !editing && <Comment comment={comment} />}
+      {editing && (
+        <CommentForm createComment={updateComment} prevBody={comment.body} />
+      )}
       {comment !== null && (
         <ul>
           {comment.comments.map((c) => (
@@ -99,15 +119,15 @@ const CommentDetail = (props) => {
         </ul>
       )}
       {user === null && <div>Log in to leave a comment</div>}
-      {user !== null && !creatingComment && (
+      {user !== null && !editing && !creatingComment && !deleting && (
         <button type="button" onClick={toggleCommenting}>
           Add Comment
         </button>
       )}
-      {user !== null && creatingComment && (
+      {user !== null && !editing && creatingComment && (
         <CommentForm createComment={createComment} />
       )}
-      {user !== null && creatingComment && (
+      {user !== null && !editing && creatingComment && (
         <button type="button" onClick={toggleCommenting}>
           Cancel
         </button>
@@ -122,16 +142,24 @@ const CommentDetail = (props) => {
           </ul>
         </div>
       )}
-      {user !== null && comment !== null && user._id === comment.user._id && (
-        <button type="button" onClick={toggleEditing}>
-          Edit Comment
-        </button>
-      )}
-      {user !== null && comment !== null && user._id === comment.user._id && (
-        <button type="button" onClick={toggleDeleting}>
-          {deleting ? 'Cancel' : 'Delete Comment'}
-        </button>
-      )}
+      {user !== null &&
+        comment !== null &&
+        user._id === comment.user._id &&
+        !creatingComment &&
+        !deleting && (
+          <button type="button" onClick={toggleEditing}>
+            {editing ? 'Cancel Edit' : 'Edit Comment'}
+          </button>
+        )}
+      {user !== null &&
+        comment !== null &&
+        user._id === comment.user._id &&
+        !editing &&
+        !creatingComment && (
+          <button type="button" onClick={toggleDeleting}>
+            {deleting ? 'Cancel' : 'Delete Comment'}
+          </button>
+        )}
       {deleting && (
         <div>
           <p>Are you sure you want to delete this comment?</p>
