@@ -35,8 +35,8 @@ const App = () => {
     });
     const postData = await postResponse.json();
     setLoggedIn(postData.loggedIn);
-    if (postData.errors) {
-      setLoginErrors(postData.errors);
+    if (!postData.loggedIn) {
+      setLoginErrors([{ msg: 'Username or password incorrect' }]);
       return;
     }
     fetchLoginStatus();
@@ -78,10 +78,7 @@ const App = () => {
           path="/users/:id"
           element={<UserDetail currentUser={currentUser} logout={logout} />}
         />
-        <Route
-          path="/users/:id/update"
-          element={<UpdateUser currentUser={currentUser} />}
-        />
+        <Route path="/users/:id/update" element={<UpdateUser />} />
       </Routes>
     </div>
   );
