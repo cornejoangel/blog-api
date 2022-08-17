@@ -8,7 +8,6 @@ const UpdateUser = () => {
   const [data, setData] = useState({});
   const [errors, setErrors] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +15,6 @@ const UpdateUser = () => {
       const response = await fetch(`/api/users/${id}/update`);
       const responseData = await response.json();
       setData(responseData);
-      setUser(responseData.user);
       if (responseData.error) {
         setLoggedIn(false);
         return;
