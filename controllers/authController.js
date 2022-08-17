@@ -68,33 +68,42 @@ exports.auth_signup_post = [
     // Extract and validation errors
     const errors = validationResult(req);
 
-    // Encrypt the password
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+    User.find({ username: req.body.username }).exec((err, prevUser) => {
       if (err) {
         return next(err);
       }
-      const user = new User({
-        username: req.body.username,
-        password: hashedPassword,
-        join_date: new Date(),
-      });
-
-      if (!errors.isEmpty()) {
-        // There were validation errors
-        res.send({
-          title: 'Signup',
-          user,
-          errors: errors.array(),
-        });
+      if (prevUser) {
+        res.json({ errors: [{ msg: 'Username is taken' }] });
         return;
       }
-
-      // No errors, save the new user
-      user.save((err) => {
+      // Encrypt the password
+      bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) {
           return next(err);
         }
-        res.json({ message: 'success' });
+        const user = new User({
+          username: req.body.username,
+          password: hashedPassword,
+          join_date: new Date(),
+        });
+
+        if (!errors.isEmpty()) {
+          // There were validation errors
+          res.send({
+            title: 'Signup',
+            user,
+            errors: errors.array(),
+          });
+          return;
+        }
+
+        // No errors, save the new user
+        user.save((err) => {
+          if (err) {
+            return next(err);
+          }
+          res.json({ message: 'success' });
+        });
       });
     });
   },
