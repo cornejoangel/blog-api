@@ -68,7 +68,7 @@ exports.auth_signup_post = [
     // Extract and validation errors
     const errors = validationResult(req);
 
-    User.find({ username: req.body.username }).exec((err, prevUser) => {
+    User.findOne({ username: req.body.username }).exec((err, prevUser) => {
       if (err) {
         return next(err);
       }
