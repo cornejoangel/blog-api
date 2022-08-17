@@ -160,6 +160,11 @@ const CommentDetail = (props) => {
             {deleting ? 'Cancel' : 'Delete Comment'}
           </button>
         )}
+      {user !== null && comment !== null && user.admin && (
+        <button type="button" onClick={toggleDeleting}>
+          {deleting ? 'Cancel' : 'Delete Comment'}
+        </button>
+      )}
       {deleting && (
         <div>
           <p>Are you sure you want to delete this comment?</p>
