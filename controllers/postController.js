@@ -93,11 +93,6 @@ exports.post_create_post = [
   },
 ];
 
-// GET for deleting Post
-exports.post_delete_get = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: POST DELETE GET');
-};
-
 // POST for deleting Post
 exports.post_delete_post = function (req, res, next) {
   res.send('NOT IMPLEMENTED: POST DELETE POST');
