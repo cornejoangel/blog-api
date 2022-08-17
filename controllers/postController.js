@@ -10,6 +10,10 @@ exports.post_detail = function (req, res, next) {
       path: 'comments',
       populate: { path: 'user' },
     })
+    .populate({
+      path: 'comments',
+      populate: { path: 'comments' },
+    })
     .exec((err, post) => {
       if (err) {
         return next(err);
