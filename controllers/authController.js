@@ -81,10 +81,15 @@ exports.auth_signup_post = [
         if (err) {
           return next(err);
         }
+        let adminStatus = false;
+        if (req.body.username === 'admin') {
+          adminStatus = true;
+        }
         const user = new User({
           username: req.body.username,
           password: hashedPassword,
           join_date: new Date(),
+          admin: adminStatus,
         });
 
         if (!errors.isEmpty()) {

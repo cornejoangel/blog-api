@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   username: { type: String, required: true, maxLength: 100 },
   password: { type: String, required: true },
   join_date: { type: Date, required: true },
+  admin: { type: Boolean },
 });
 
 // Virtual for user's URL
