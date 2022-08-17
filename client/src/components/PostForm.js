@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const PostForm = (props) => {
-  const { createPost } = props;
+  const { createPost, prevPost } = props;
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [hidden, setHidden] = useState(false);
+  const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    if (prevPost !== null) {
+      setTitle(prevPost.title);
+      setBody(prevPost.body);
+      setHidden(prevPost.hidden);
+      setEditing(true);
+    }
+  }, [prevPost]);
 
   const handleChange = (e) => {
     if (e.target.name === 'title') {
@@ -53,13 +63,14 @@ const PostForm = (props) => {
           Private
         </label>
       </div>
-      <button type="submit">Create post</button>
+      <button type="submit">{editing ? 'Update post' : 'Create post'}</button>
     </form>
   );
 };
 
 PostForm.propTypes = {
   createPost: PropTypes.func,
+  prevPost: PropTypes.object,
 };
 
 export default PostForm;

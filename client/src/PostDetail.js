@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
+import PostForm from './components/PostForm';
 import CommentForm from './components/CommentForm';
 import Comment from './components/Comment';
 
@@ -11,6 +12,7 @@ const PostDetail = (props) => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [creatingComment, setCreatingComment] = useState(false);
+  const [postErrors, setPostErrors] = useState([]);
   const [commentErrors, setCommentErrors] = useState([]);
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -67,6 +69,21 @@ const PostDetail = (props) => {
     }
   };
 
+  const updatePost = async (e, title, body, hidden) => {
+    e.preventDefault();
+    const postResponse = await fetch(`/api/posts/${id}/update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, body, hidden }),
+    });
+    const postData = await postResponse.json();
+    if (postData.errors) {
+      setPostErrors(postData.errors);
+    }
+    toggleEditing();
+    setCommentCheck(true);
+  };
+
   const createComment = async (e, body) => {
     e.preventDefault();
     const postResponse = await fetch('/api/comments/create', {
@@ -89,7 +106,18 @@ const PostDetail = (props) => {
   return (
     <div>
       {post === null && <div>Loading...</div>}
-      {post !== null && <Post post={post} />}
+      {post !== null && !editing && <Post post={post} />}
+      {editing && <PostForm createPost={updatePost} prevPost={post} />}
+      {postErrors.length > 0 && (
+        <div>
+          <h2>Errors</h2>
+          <ul>
+            {postErrors.map((error) => (
+              <li key={uniqid()}>{error.msg}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       {post !== null && (
         <ul>
           {post.comments.map((comment) => (
