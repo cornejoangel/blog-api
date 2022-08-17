@@ -169,6 +169,11 @@ const PostDetail = (props) => {
             {deleting ? 'Cancel' : 'Delete Post'}
           </button>
         )}
+      {user !== null && post !== null && user.admin && (
+        <button type="button" onClick={toggleDeleting}>
+          {deleting ? 'Cancel' : 'Delete Post'}
+        </button>
+      )}
       {deleting && (
         <div>
           <p>Are you sure you want to delete this post?</p>
