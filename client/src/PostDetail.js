@@ -12,6 +12,8 @@ const PostDetail = (props) => {
   const [post, setPost] = useState(null);
   const [creatingComment, setCreatingComment] = useState(false);
   const [commentErrors, setCommentErrors] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   // commentCheck is a flag that triggers a fetch to refresh the comment list
   const [commentCheck, setCommentCheck] = useState(false);
 
@@ -31,6 +33,27 @@ const PostDetail = (props) => {
       return;
     }
     setCreatingComment(true);
+  };
+
+  const toggleEditing = () => {
+    if (editing) {
+      setEditing(false);
+      return;
+    }
+    setEditing(true);
+  };
+
+  const toggleDeleting = () => {
+    if (deleting) {
+      setDeleting(false);
+      return;
+    }
+    setDeleting(true);
+  };
+
+  const deletePost = async (e) => {
+    e.preventDefault();
+    console.log('delete post not implemented');
   };
 
   const createComment = async (e, body) => {
@@ -87,6 +110,32 @@ const PostDetail = (props) => {
               <li key={uniqid()}>{error.msg}</li>
             ))}
           </ul>
+        </div>
+      )}
+      {user !== null &&
+        post !== null &&
+        user._id === post.user._id &&
+        !creatingComment &&
+        !deleting && (
+          <button type="button" onClick={toggleEditing}>
+            {editing ? 'Cancel Edit' : 'Edit Post'}
+          </button>
+        )}
+      {user !== null &&
+        post !== null &&
+        user._id === post.user._id &&
+        !editing &&
+        !creatingComment && (
+          <button type="button" onClick={toggleDeleting}>
+            {deleting ? 'Cancel' : 'Delete Post'}
+          </button>
+        )}
+      {deleting && (
+        <div>
+          <p>Are you sure you want to delete this post?</p>
+          <button type="button" onClick={(e) => deletePost(e)}>
+            Delete
+          </button>
         </div>
       )}
     </div>
