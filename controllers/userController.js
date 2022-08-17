@@ -95,9 +95,12 @@ exports.user_update_get = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    if (req.user && String(req.user._id) === String(user._id)) {
+    if (
+      (req.user && String(req.user._id) === String(user._id)) ||
+      (req.user && req.user.admin)
+    ) {
       // You must be logged in as the user you are trying to update
-      // TODO later you will be able to access this for other users if you are an admin
+      // Or you could just be an admin
       res.json({ title: 'Update User', user });
       return;
     }
@@ -152,11 +155,11 @@ exports.user_update_post = [
       }
 
       // No errors, update the user
-      User.findByIdAndUpdate(req.params.id, user, {}, (err, theuser) => {
+      User.findByIdAndUpdate(req.params.id, user, {}, (err, theUser) => {
         if (err) {
           return next(err);
         }
-        res.json({ success: true });
+        res.json({ success: true, theUser });
       });
     });
   },

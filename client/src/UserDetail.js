@@ -94,6 +94,11 @@ const UserDetail = (props) => {
           <button type="button">Update User</button>
         </Link>
       )}
+      {currentUser !== null && user !== null && currentUser.admin && (
+        <Link to={`/users/${user._id}/update`}>
+          <button type="button">Update User</button>
+        </Link>
+      )}
       {currentUser !== null && user !== null && currentUser._id === user._id && (
         <button type="button" onClick={deleteToggle}>
           {deleting ? 'Cancel' : 'Delete User'}
