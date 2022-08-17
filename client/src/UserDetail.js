@@ -104,6 +104,11 @@ const UserDetail = (props) => {
           {deleting ? 'Cancel' : 'Delete User'}
         </button>
       )}
+      {currentUser !== null && user !== null && currentUser.admin && (
+        <button type="button" onClick={deleteToggle}>
+          {deleting ? 'Cancel' : 'Delete User'}
+        </button>
+      )}
       {deleting && (
         <div>
           <p>
