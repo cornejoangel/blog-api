@@ -108,6 +108,15 @@ const PostDetail = (props) => {
       {post === null && <div>Loading...</div>}
       {post !== null && !editing && <Post post={post} />}
       {editing && <PostForm createPost={updatePost} prevPost={post} />}
+      {user !== null &&
+        post !== null &&
+        user._id === post.user._id &&
+        !creatingComment &&
+        !deleting && (
+          <button type="button" onClick={toggleEditing}>
+            {editing ? 'Cancel Edit' : 'Edit Post'}
+          </button>
+        )}
       {postErrors.length > 0 && (
         <div>
           <h2>Errors</h2>
@@ -128,7 +137,7 @@ const PostDetail = (props) => {
         </ul>
       )}
       {user === null && <div>Log in to leave a comment</div>}
-      {user !== null && !creatingComment && (
+      {user !== null && !editing && !creatingComment && (
         <button type="button" onClick={toggleCommenting}>
           Add Comment
         </button>
@@ -151,15 +160,6 @@ const PostDetail = (props) => {
           </ul>
         </div>
       )}
-      {user !== null &&
-        post !== null &&
-        user._id === post.user._id &&
-        !creatingComment &&
-        !deleting && (
-          <button type="button" onClick={toggleEditing}>
-            {editing ? 'Cancel Edit' : 'Edit Post'}
-          </button>
-        )}
       {user !== null &&
         post !== null &&
         user._id === post.user._id &&
