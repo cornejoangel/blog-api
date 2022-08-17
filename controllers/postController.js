@@ -95,7 +95,17 @@ exports.post_create_post = [
 
 // POST for deleting Post
 exports.post_delete_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED: POST DELETE POST');
+  Post.findById(req.params.id).exec((err) => {
+    if (err) {
+      return next(err);
+    }
+    Post.findByIdAndRemove(req.body.postid, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.json({ success: true });
+    });
+  });
 };
 
 // GET for updating Post

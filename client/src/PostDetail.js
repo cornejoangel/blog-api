@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
@@ -16,6 +16,7 @@ const PostDetail = (props) => {
   const [deleting, setDeleting] = useState(false);
   // commentCheck is a flag that triggers a fetch to refresh the comment list
   const [commentCheck, setCommentCheck] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +54,17 @@ const PostDetail = (props) => {
 
   const deletePost = async (e) => {
     e.preventDefault();
-    console.log('delete post not implemented');
+    const postResponse = await fetch(`/api/posts/${id}/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        postid: post._id,
+      }),
+    });
+    const postData = await postResponse.json();
+    if (postData.success) {
+      navigate('/');
+    }
   };
 
   const createComment = async (e, body) => {
