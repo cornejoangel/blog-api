@@ -9,6 +9,7 @@ import CommentDetail from './CommentDetail';
 import UserDetail from './UserDetail';
 import UpdateUser from './UpdateUser';
 import Navbar from './components/Navbar';
+import './styles/App.scss';
 
 const App = () => {
   const [loginErrors, setLoginErrors] = useState([]);
