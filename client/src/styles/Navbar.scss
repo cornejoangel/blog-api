@@ -1,0 +1,38 @@
+@use 'base';
+
+nav {
+  display: flex;
+  border-bottom: 3px solid black;
+  font-size: 1.25rem;
+  justify-content: flex-end;
+
+  ul {
+    padding: 0;
+    margin: 0 1rem;
+  }
+
+  li {
+    margin: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: base.$font-color;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  a:hover {
+    background-color: #ebebeb;
+  }
+
+  .links {
+    display: flex;
+  }
+
+  .auth {
+    display: flex;
+  }
+
+}

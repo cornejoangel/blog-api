@@ -1,7 +1,9 @@
 $font-main: 'Inter', sans-serif;
+$font-color: #2e2e2e;
 
 html {
   font-family: $font-main;
+  color: $font-color;
 }
 
 ul {

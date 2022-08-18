@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import '../styles/Navbar.scss';
 
 const Navbar = (props) => {
   const { loggedIn, logout } = props;
@@ -15,7 +16,7 @@ const Navbar = (props) => {
         </li>
       </ul>
       {!loggedIn && (
-        <ul>
+        <ul className="auth">
           <li>
             <Link to="/signup">Signup</Link>
           </li>
