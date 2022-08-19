@@ -1,0 +1,14 @@
+@use 'base';
+
+.content {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 10%;
+}
+
+.page-title {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}

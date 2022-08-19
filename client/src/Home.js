@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import PostForm from './components/PostForm';
 import Post from './components/Post';
+import './styles/Home.scss';
 
 const Home = (props) => {
   const { user } = props;
@@ -50,8 +51,7 @@ const Home = (props) => {
   };
 
   return (
-    <div className="app">
-      <h1>{data.title}</h1>
+    <div className="content">
       {user !== null && !creatingPost && (
         <button type="button" onClick={togglePosting}>
           Create Post
