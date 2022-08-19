@@ -1,0 +1,6 @@
+@use 'base';
+
+.post-container {
+  padding: 1rem 0;
+  border-bottom: 1px solid base.$font-color;
+}

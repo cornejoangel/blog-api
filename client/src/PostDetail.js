@@ -6,6 +6,8 @@ import Post from './components/Post';
 import PostForm from './components/PostForm';
 import CommentForm from './components/CommentForm';
 import Comment from './components/Comment';
+import './styles/Home.scss';
+import './styles/PostDetail.scss';
 
 const PostDetail = (props) => {
   const { user } = props;
@@ -104,29 +106,31 @@ const PostDetail = (props) => {
   };
 
   return (
-    <div>
-      {post === null && <div>Loading...</div>}
-      {post !== null && !editing && <Post post={post} />}
-      {editing && <PostForm createPost={updatePost} prevPost={post} />}
-      {user !== null &&
-        post !== null &&
-        user._id === post.user._id &&
-        !creatingComment &&
-        !deleting && (
-          <button type="button" onClick={toggleEditing}>
-            {editing ? 'Cancel Edit' : 'Edit Post'}
-          </button>
+    <div className="content">
+      <div className="post-container">
+        {post === null && <div>Loading...</div>}
+        {post !== null && !editing && <Post post={post} />}
+        {editing && <PostForm createPost={updatePost} prevPost={post} />}
+        {user !== null &&
+          post !== null &&
+          user._id === post.user._id &&
+          !creatingComment &&
+          !deleting && (
+            <button type="button" onClick={toggleEditing}>
+              {editing ? 'Cancel Edit' : 'Edit Post'}
+            </button>
+          )}
+        {postErrors.length > 0 && (
+          <div>
+            <h2>Errors</h2>
+            <ul>
+              {postErrors.map((error) => (
+                <li key={uniqid()}>{error.msg}</li>
+              ))}
+            </ul>
+          </div>
         )}
-      {postErrors.length > 0 && (
-        <div>
-          <h2>Errors</h2>
-          <ul>
-            {postErrors.map((error) => (
-              <li key={uniqid()}>{error.msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      </div>
       {post !== null && (
         <ul>
           {post.comments.map((comment) => (
