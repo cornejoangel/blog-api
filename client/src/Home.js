@@ -68,7 +68,7 @@ const Home = (props) => {
       {posts.length > 0 && (
         <ul>
           {posts.map((post) => (
-            <li key={uniqid()}>
+            <li key={uniqid()} className="home-post">
               <Post post={post} />
               <Link to={`/posts/${post._id}`}>View Post</Link>
             </li>

@@ -12,3 +12,14 @@
   justify-content: center;
   margin: 0 auto;
 }
+
+.home-post {
+  border: 2px solid black;
+  margin: 1rem 0;
+  padding: 1rem;
+
+  a {
+    font-size: .75rem;
+    color: base.$font-color;
+  }
+}
