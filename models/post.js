@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const PostSchema = new Schema({
   title: { type: String, maxLength: 100 },
-  body: { type: String, required: true, maxLength: 1024 },
+  body: { type: String, required: true, maxLength: 10000 },
   time_stamp: { type: Date, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   hidden: { type: Boolean, required: true },
@@ -22,6 +22,15 @@ PostSchema.virtual('time_stamp_formatted').get(function () {
   return DateTime.fromJSDate(this.time_stamp).toLocaleString(
     DateTime.DATETIME_SHORT_WITH_SECONDS
   );
+});
+
+PostSchema.virtual('edit_time_formatted').get(function () {
+  if (this.edited) {
+    return DateTime.fromJSDate(this.edited_time).toLocaleString(
+      DateTime.DATETIME_SHORT_WITH_SECONDS
+    );
+  }
+  return false;
 });
 
 // Export model
