@@ -53,7 +53,7 @@ exports.post_create_get = function (req, res, next) {
 exports.post_create_post = [
   // Validate and sanitize the title and body fields
   body('title').trim().escape().unescape("'"),
-  body('body', 'Post body required')
+  body('body', 'Post body required (max characters: 10,000)')
     .trim()
     .isLength({ min: 1, max: 1024 })
     .escape()
