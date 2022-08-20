@@ -15,7 +15,10 @@ const LoginForm = (props) => {
   };
 
   return (
-    <form onSubmit={(e) => loginPost(e, username, password)}>
+    <form
+      className="login-form"
+      onSubmit={(e) => loginPost(e, username, password)}
+    >
       <label htmlFor="username">Username:</label>
       <input
         type="text"

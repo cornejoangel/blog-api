@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import LoginForm from './components/LoginForm';
+import './styles/Login.scss';
 
 const Login = (props) => {
   const { loginPost, loginErrors: errors, loggedIn } = props;
@@ -17,9 +18,9 @@ const Login = (props) => {
   }, []);
 
   return (
-    <div className="app">
+    <div className="content">
       <h1>{data.title}</h1>
-      {loggedIn && <p>you are already logged in</p>}
+      {loggedIn && <p>You are already logged in</p>}
       {!loggedIn && <LoginForm loginPost={loginPost} />}
       {errors.length > 0 && (
         <div>

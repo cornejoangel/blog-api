@@ -1,6 +1,7 @@
 $font-main: 'Inter', sans-serif;
 $font-color: #2e2e2e;
 $secondary-text: #777;
+$medium-bg: #cecece;
 $light-bg: #ebebeb;
 $very-light-bg: #efefef;
 
@@ -12,4 +13,22 @@ html {
 ul {
   list-style: none;
   padding-left: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+button {
+  padding: .5rem;
+  background-color: $light-bg;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 700;
+}
+
+button:hover {
+  background-color: $very-light-bg;
+  background-color: $medium-bg;
 }
