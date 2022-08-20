@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
@@ -134,13 +134,17 @@ const PostDetail = (props) => {
       {post !== null && (
         <ul>
           {post.comments.map((comment) => (
-            <li key={uniqid()}>
+            <li key={uniqid()} className="comment-container">
               <Comment comment={comment} />
             </li>
           ))}
         </ul>
       )}
-      {user === null && <div>Log in to leave a comment</div>}
+      {user === null && (
+        <div className="login-prompt">
+          <Link to="/login">Log in</Link> to leave a comment
+        </div>
+      )}
       {user !== null && !editing && !creatingComment && (
         <button type="button" onClick={toggleCommenting}>
           Add Comment
