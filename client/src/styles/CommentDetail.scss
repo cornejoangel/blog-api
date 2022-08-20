@@ -1,0 +1,19 @@
+@use 'base';
+
+.main-comment-container {
+  padding: 1rem;
+  border-bottom: 1px solid base.$font-color;
+}
+
+.comment-container {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.login-prompt {
+  a {
+    color: base.$font-color;
+    font-weight: 700;
+  }
+}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import CommentForm from './components/CommentForm';
 import Comment from './components/Comment';
+import './styles/CommentDetail.scss';
 
 const CommentDetail = (props) => {
   const { user } = props;
@@ -103,12 +104,14 @@ const CommentDetail = (props) => {
   };
 
   return (
-    <div>
-      {comment === null && <div>Loading...</div>}
-      {comment !== null && !editing && <Comment comment={comment} />}
-      {editing && (
-        <CommentForm createComment={updateComment} prevBody={comment.body} />
-      )}
+    <div className="content">
+      <div className="main-comment-container">
+        {comment === null && <div>Loading...</div>}
+        {comment !== null && !editing && <Comment comment={comment} />}
+        {editing && (
+          <CommentForm createComment={updateComment} prevBody={comment.body} />
+        )}
+      </div>
       {comment !== null && (
         <ul>
           {comment.comments.map((c) => (
@@ -118,7 +121,11 @@ const CommentDetail = (props) => {
           ))}
         </ul>
       )}
-      {user === null && <div>Log in to leave a comment</div>}
+      {user === null && (
+        <div className="login-prompt">
+          <Link to="/login">Log in</Link> to leave a comment
+        </div>
+      )}
       {user !== null && !editing && !creatingComment && !deleting && (
         <button type="button" onClick={toggleCommenting}>
           Add Comment
