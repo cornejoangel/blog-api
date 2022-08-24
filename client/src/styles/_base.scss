@@ -32,3 +32,27 @@ button:hover {
   background-color: $very-light-bg;
   background-color: $medium-bg;
 }
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 3px solid black;
+  max-width: 300px;
+  margin: 0 auto;
+
+  label {
+    margin: 1rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+  }
+
+  input {
+    margin: 1rem;
+    margin-top: 0;
+  }
+
+  button {
+    margin: 1rem;
+  }
+}
