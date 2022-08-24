@@ -18,7 +18,10 @@ const SignupForm = (props) => {
   };
 
   return (
-    <form onSubmit={(e) => submitPost(e, username, password, confirmation)}>
+    <form
+      className="signup-form auth-form"
+      onSubmit={(e) => submitPost(e, username, password, confirmation)}
+    >
       <label htmlFor="username">Username:</label>
       <input
         type="text"
@@ -33,10 +36,13 @@ const SignupForm = (props) => {
         value={password}
         onChange={handleChange}
       />
-      <label htmlFor="confirmation">Confirm Password:</label>
+      <label htmlFor="confirmation-label" className="confirmation">
+        Confirm Password:
+      </label>
       <input
         type="password"
         name="confirmation"
+        className="confirmation"
         value={confirmation}
         onChange={handleChange}
       />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uniqid from 'uniqid';
 import SignupForm from './components/SignupForm';
+import './styles/Signup.scss';
 
 const Signup = () => {
   const [data, setData] = useState({});
@@ -37,7 +38,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="app">
+    <div className="content">
       <h1>{data.title}</h1>
       {!loggedIn && <SignupForm submitPost={signupPost} />}
       {loggedIn && (
