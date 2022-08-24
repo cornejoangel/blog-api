@@ -16,7 +16,7 @@ const LoginForm = (props) => {
 
   return (
     <form
-      className="login-form"
+      className="login-form auth-form"
       onSubmit={(e) => loginPost(e, username, password)}
     >
       <label htmlFor="username">Username:</label>
