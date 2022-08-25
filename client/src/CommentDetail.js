@@ -111,11 +111,64 @@ const CommentDetail = (props) => {
         {editing && (
           <CommentForm createComment={updateComment} prevBody={comment.body} />
         )}
+        {commentErrors.length > 0 && (
+          <div>
+            <h2>Errors</h2>
+            <ul>
+              {commentErrors.map((error) => (
+                <li key={uniqid()}>{error.msg}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {user !== null &&
+          comment !== null &&
+          user._id === comment.user._id &&
+          !creatingComment &&
+          !deleting && (
+            <button
+              type="button"
+              className={editing ? 'cancel-edit-button' : 'edit-button'}
+              onClick={toggleEditing}
+            >
+              {editing ? 'Cancel Edit' : 'Edit Comment'}
+            </button>
+          )}
+        {user !== null &&
+          comment !== null &&
+          user._id === comment.user._id &&
+          !editing &&
+          !creatingComment && (
+            <button
+              type="button"
+              className={deleting ? 'cancel-delete-button' : 'delete-button'}
+              onClick={toggleDeleting}
+            >
+              {deleting ? 'Cancel' : 'Delete Comment'}
+            </button>
+          )}
+        {user !== null && comment !== null && user.admin && (
+          <button
+            type="button"
+            className={deleting ? 'cancel-delete-button' : 'delete-button'}
+            onClick={toggleDeleting}
+          >
+            {deleting ? 'Cancel' : 'Delete Comment'}
+          </button>
+        )}
+        {deleting && (
+          <div>
+            <p>Are you sure you want to delete this comment?</p>
+            <button type="button" onClick={(e) => deleteComment(e)}>
+              Delete
+            </button>
+          </div>
+        )}
       </div>
       {comment !== null && (
         <ul>
           {comment.comments.map((c) => (
-            <li key={uniqid()}>
+            <li key={uniqid()} className="comment-container">
               <Comment comment={c} />
             </li>
           ))}
@@ -132,53 +185,16 @@ const CommentDetail = (props) => {
         </button>
       )}
       {user !== null && !editing && creatingComment && (
-        <CommentForm createComment={createComment} />
+        <CommentForm createComment={createComment} prevBody="" />
       )}
       {user !== null && !editing && creatingComment && (
-        <button type="button" onClick={toggleCommenting}>
+        <button
+          type="button"
+          className="cancel-comment"
+          onClick={toggleCommenting}
+        >
           Cancel
         </button>
-      )}
-      {commentErrors.length > 0 && (
-        <div>
-          <h2>Errors</h2>
-          <ul>
-            {commentErrors.map((error) => (
-              <li key={uniqid()}>{error.msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {user !== null &&
-        comment !== null &&
-        user._id === comment.user._id &&
-        !creatingComment &&
-        !deleting && (
-          <button type="button" onClick={toggleEditing}>
-            {editing ? 'Cancel Edit' : 'Edit Comment'}
-          </button>
-        )}
-      {user !== null &&
-        comment !== null &&
-        user._id === comment.user._id &&
-        !editing &&
-        !creatingComment && (
-          <button type="button" onClick={toggleDeleting}>
-            {deleting ? 'Cancel' : 'Delete Comment'}
-          </button>
-        )}
-      {user !== null && comment !== null && user.admin && (
-        <button type="button" onClick={toggleDeleting}>
-          {deleting ? 'Cancel' : 'Delete Comment'}
-        </button>
-      )}
-      {deleting && (
-        <div>
-          <p>Are you sure you want to delete this comment?</p>
-          <button type="button" onClick={(e) => deleteComment(e)}>
-            Delete
-          </button>
-        </div>
       )}
     </div>
   );

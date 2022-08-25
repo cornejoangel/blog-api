@@ -118,7 +118,7 @@ const PostDetail = (props) => {
           !deleting && (
             <button
               type="button"
-              className={editing ? 'cancel-post' : 'edit-post'}
+              className={editing ? 'cancel-edit-button' : 'edit-button'}
               onClick={toggleEditing}
             >
               {editing ? 'Cancel Edit' : 'Edit Post'}
@@ -129,12 +129,20 @@ const PostDetail = (props) => {
           user._id === post.user._id &&
           !editing &&
           !creatingComment && (
-            <button type="button" onClick={toggleDeleting}>
+            <button
+              type="button"
+              className={deleting ? 'cancel-delete-button' : 'delete-button'}
+              onClick={toggleDeleting}
+            >
               {deleting ? 'Cancel' : 'Delete Post'}
             </button>
           )}
         {user !== null && post !== null && user.admin && (
-          <button type="button" onClick={toggleDeleting}>
+          <button
+            type="button"
+            className={deleting ? 'cancel-delete-button' : 'delete-button'}
+            onClick={toggleDeleting}
+          >
             {deleting ? 'Cancel' : 'Delete Post'}
           </button>
         )}
