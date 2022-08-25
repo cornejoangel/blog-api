@@ -26,10 +26,10 @@ button {
   cursor: pointer;
   box-sizing: border-box;
   font-weight: 700;
+  border-radius: 3px;
 }
 
 button:hover {
-  background-color: $very-light-bg;
   background-color: $medium-bg;
 }
 
