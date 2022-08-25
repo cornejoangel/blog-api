@@ -39,7 +39,7 @@ const PostForm = (props) => {
       className="post-form"
       onSubmit={(e) => createPost(e, title, body, hidden)}
     >
-      <h2>New Post</h2>
+      <h2>{editing ? 'Edit Post' : 'New Post'}</h2>
       <label htmlFor="title">Title (Optional):</label>
       <input type="text" name="title" value={title} onChange={handleChange} />
       <label htmlFor="body">Body:</label>

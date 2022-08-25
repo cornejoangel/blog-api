@@ -116,7 +116,11 @@ const PostDetail = (props) => {
           user._id === post.user._id &&
           !creatingComment &&
           !deleting && (
-            <button type="button" onClick={toggleEditing}>
+            <button
+              type="button"
+              className={editing ? 'cancel-post' : 'edit-post'}
+              onClick={toggleEditing}
+            >
               {editing ? 'Cancel Edit' : 'Edit Post'}
             </button>
           )}
