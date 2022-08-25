@@ -73,8 +73,13 @@ button:hover {
 }
 
 .cancel-edit-button {
+  display: block;
+  margin: 0 auto;
   margin-top: 1rem;
-  margin-right: 1rem;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid black;
 }
 
 .delete-button {
@@ -85,4 +90,9 @@ button:hover {
 .cancel-delete-button {
   margin-top: 1rem;
   margin-right: 1rem;
+}
+
+textarea {
+  min-height: 6rem;
+  resize: none;
 }
