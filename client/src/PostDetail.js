@@ -124,6 +124,28 @@ const PostDetail = (props) => {
               {editing ? 'Cancel Edit' : 'Edit Post'}
             </button>
           )}
+        {user !== null &&
+          post !== null &&
+          user._id === post.user._id &&
+          !editing &&
+          !creatingComment && (
+            <button type="button" onClick={toggleDeleting}>
+              {deleting ? 'Cancel' : 'Delete Post'}
+            </button>
+          )}
+        {user !== null && post !== null && user.admin && (
+          <button type="button" onClick={toggleDeleting}>
+            {deleting ? 'Cancel' : 'Delete Post'}
+          </button>
+        )}
+        {deleting && (
+          <div>
+            <p>Are you sure you want to delete this post?</p>
+            <button type="button" onClick={(e) => deletePost(e)}>
+              Delete
+            </button>
+          </div>
+        )}
         {postErrors.length > 0 && (
           <div>
             <h2>Errors</h2>
@@ -158,7 +180,11 @@ const PostDetail = (props) => {
         <CommentForm createComment={createComment} prevBody="" />
       )}
       {user !== null && creatingComment && (
-        <button type="button" onClick={toggleCommenting}>
+        <button
+          type="button"
+          className="cancel-comment"
+          onClick={toggleCommenting}
+        >
           Cancel
         </button>
       )}
@@ -170,28 +196,6 @@ const PostDetail = (props) => {
               <li key={uniqid()}>{error.msg}</li>
             ))}
           </ul>
-        </div>
-      )}
-      {user !== null &&
-        post !== null &&
-        user._id === post.user._id &&
-        !editing &&
-        !creatingComment && (
-          <button type="button" onClick={toggleDeleting}>
-            {deleting ? 'Cancel' : 'Delete Post'}
-          </button>
-        )}
-      {user !== null && post !== null && user.admin && (
-        <button type="button" onClick={toggleDeleting}>
-          {deleting ? 'Cancel' : 'Delete Post'}
-        </button>
-      )}
-      {deleting && (
-        <div>
-          <p>Are you sure you want to delete this post?</p>
-          <button type="button" onClick={(e) => deletePost(e)}>
-            Delete
-          </button>
         </div>
       )}
     </div>

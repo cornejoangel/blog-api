@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/CommentForm.scss';
 
 const CommentForm = (props) => {
   const { createComment, prevBody } = props;
@@ -18,8 +19,8 @@ const CommentForm = (props) => {
   };
 
   return (
-    <form onSubmit={(e) => createComment(e, body)}>
-      <label htmlFor="body">Comment:</label>
+    <form className="comment-form" onSubmit={(e) => createComment(e, body)}>
+      <label htmlFor="body">{editing ? 'Update Comment' : 'New Comment'}</label>
       <textarea name="body" value={body} onChange={handleChange} />
       <button type="submit">
         {editing ? 'Update comment' : 'Create comment'}
