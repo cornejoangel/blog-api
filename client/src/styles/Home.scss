@@ -23,3 +23,22 @@
     color: base.$font-color;
   }
 }
+
+.create-post {
+  margin-top: 1rem;
+  border: 1px solid black;
+}
+
+.create-post-home {
+  border: none;
+}
+
+.cancel-post {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid black;
+}

@@ -29,6 +29,7 @@ const Home = (props) => {
   }, [creatingPost]);
 
   const togglePosting = () => {
+    setPostErrors([]);
     if (creatingPost) {
       setCreatingPost(false);
       return;
@@ -46,6 +47,7 @@ const Home = (props) => {
     const postData = await postResponse.json();
     if (postData.errors) {
       setPostErrors(postData.errors);
+      return;
     }
     togglePosting();
   };
@@ -53,7 +55,11 @@ const Home = (props) => {
   return (
     <div className="content">
       {user !== null && !creatingPost && (
-        <button type="button" onClick={togglePosting}>
+        <button
+          type="button"
+          className="create-post create-post-home"
+          onClick={togglePosting}
+        >
           Create Post
         </button>
       )}
@@ -61,9 +67,19 @@ const Home = (props) => {
         <PostForm createPost={createPost} prevPost={null} />
       )}
       {user !== null && creatingPost && (
-        <button type="button" onClick={togglePosting}>
+        <button type="button" className="cancel-post" onClick={togglePosting}>
           Cancel Post
         </button>
+      )}
+      {postErrors.length > 0 && (
+        <div>
+          <h2>Errors</h2>
+          <ul>
+            {postErrors.map((error) => (
+              <li key={uniqid()}>{error.msg}</li>
+            ))}
+          </ul>
+        </div>
       )}
       {posts.length > 0 && (
         <ul>
@@ -76,16 +92,6 @@ const Home = (props) => {
         </ul>
       )}
       {posts.length === 0 && <p>There are no posts.</p>}
-      {postErrors.length > 0 && (
-        <div>
-          <h2>Errors</h2>
-          <ul>
-            {postErrors.map((error) => (
-              <li key={uniqid()}>{error.msg}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };

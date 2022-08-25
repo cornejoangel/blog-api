@@ -1,0 +1,43 @@
+@use 'base';
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+
+  h2 {
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 1rem auto;
+    font-size: 2rem;
+  }
+
+  label {
+    margin-bottom: .5rem;
+    font-weight: 300;
+  }
+
+  input {
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  .radio-label {
+    padding: 1rem;
+    padding-left: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  input[type="radio"] {
+    margin: 1rem 0;
+    margin-right: .5rem;
+  }
+
+  textarea {
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+}

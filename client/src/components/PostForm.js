@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/PostForm.scss';
 
 const PostForm = (props) => {
   const { createPost, prevPost } = props;
@@ -34,13 +35,17 @@ const PostForm = (props) => {
   };
 
   return (
-    <form onSubmit={(e) => createPost(e, title, body, hidden)}>
-      <label htmlFor="title">Title:</label>
+    <form
+      className="post-form"
+      onSubmit={(e) => createPost(e, title, body, hidden)}
+    >
+      <h2>New Post</h2>
+      <label htmlFor="title">Title (Optional):</label>
       <input type="text" name="title" value={title} onChange={handleChange} />
       <label htmlFor="body">Body:</label>
       <textarea name="body" value={body} onChange={handleChange} />
       <div>
-        <label htmlFor="public">
+        <label className="radio-label" htmlFor="public">
           <input
             type="radio"
             id="public"
@@ -51,7 +56,7 @@ const PostForm = (props) => {
           />
           Public
         </label>
-        <label htmlFor="private">
+        <label className="radio-label" htmlFor="private">
           <input
             type="radio"
             id="private"
@@ -63,7 +68,9 @@ const PostForm = (props) => {
           Private
         </label>
       </div>
-      <button type="submit">{editing ? 'Update post' : 'Create post'}</button>
+      <button className="create-post" type="submit">
+        {editing ? 'Update Post' : 'Create Post'}
+      </button>
     </form>
   );
 };
