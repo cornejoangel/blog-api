@@ -1,6 +1,5 @@
 const { body, validationResult } = require('express-validator');
 const Post = require('../models/post');
-const User = require('../models/user');
 
 // Display detail page for a post
 exports.post_detail = function (req, res, next) {
@@ -52,10 +51,13 @@ exports.post_create_get = function (req, res, next) {
 // POST for creating Post
 exports.post_create_post = [
   // Validate and sanitize the title and body fields
-  body('title').trim().escape().unescape("'"),
+  body('title', 'Title too long (max characters: 100')
+    .trim()
+    .escape()
+    .unescape("'"),
   body('body', 'Post body required (max characters: 10,000)')
     .trim()
-    .isLength({ min: 1, max: 1024 })
+    .isLength({ min: 1, max: 10000 })
     .escape()
     .unescape("'"),
   // Process request after validation/sanitization
