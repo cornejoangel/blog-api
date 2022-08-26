@@ -13,10 +13,14 @@ exports.user_detail = function (req, res, next) {
         User.findById(req.params.id).exec(callback);
       },
       user_posts(callback) {
-        Post.find({ user: req.params.id }).populate('comments').exec(callback);
+        Post.find({ user: req.params.id })
+          .populate('user')
+          .populate('comments')
+          .exec(callback);
       },
       user_comments(callback) {
         Comment.find({ user: req.params.id })
+          .populate('user')
           .populate('comments')
           .exec(callback);
       },

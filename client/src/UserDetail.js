@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 import Post from './components/Post';
 import Comment from './components/Comment';
+import './styles/UserDetail.scss';
 
 const UserDetail = (props) => {
   const { currentUser, logout } = props;
@@ -57,7 +58,7 @@ const UserDetail = (props) => {
   };
 
   return (
-    <div>
+    <div className="content">
       {user === null && <div>Loading...</div>}
       {user !== null && (
         <div>
@@ -66,23 +67,24 @@ const UserDetail = (props) => {
         </div>
       )}
       {posts !== null && (
-        <div>
+        <div className="list-section posts-list">
           <h2>Posts</h2>
           <ul>
             {posts.map((post) => (
-              <li key={uniqid()}>
+              <li key={uniqid()} className="post-list-item">
                 <Post post={post} />
+                <Link to={`/posts/${post._id}`}>View Post</Link>
               </li>
             ))}
           </ul>
         </div>
       )}
       {comments !== null && (
-        <div>
+        <div className="list-section comments-list">
           <h2>Comments</h2>
           <ul>
             {comments.map((comment) => (
-              <li key={uniqid()}>
+              <li key={uniqid()} className="comment-container">
                 <Comment comment={comment} />
               </li>
             ))}
@@ -91,12 +93,16 @@ const UserDetail = (props) => {
       )}
       {currentUser !== null && user !== null && currentUser._id === user._id && (
         <Link to={`/users/${user._id}/update`}>
-          <button type="button">Update User</button>
+          <button type="button" className="update-button">
+            Update User
+          </button>
         </Link>
       )}
       {currentUser !== null && user !== null && currentUser.admin && (
         <Link to={`/users/${user._id}/update`}>
-          <button type="button">Update User</button>
+          <button type="button" className="update-button">
+            Update User
+          </button>
         </Link>
       )}
       {currentUser !== null && user !== null && currentUser._id === user._id && (

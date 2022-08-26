@@ -96,3 +96,14 @@ textarea {
   min-height: 6rem;
   resize: none;
 }
+
+.post-list-item {
+  border: 2px solid black;
+  margin: 1rem 0;
+  padding: 1rem;
+
+  a {
+    font-size: .75rem;
+    color: $font-color;
+  }
+}
