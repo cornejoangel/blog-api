@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 import { Link } from 'react-router-dom';
+import './styles/Users.scss';
 
 const Users = () => {
   const [data, setData] = useState({});
@@ -17,13 +18,14 @@ const Users = () => {
   }, []);
 
   return (
-    <div className="app">
+    <div className="content">
       <h1>{data.title}</h1>
       <ul>
         {users.map((user) => (
-          <li key={uniqid()}>
-            <Link to={`/users/${user._id}`}>{user.username}</Link> -{' '}
-            {user.join_date_formatted}
+          <li key={uniqid()} className="user-listing">
+            <Link to={`/users/${user._id}`}>
+              {user.username} <p>- Joined: {user.join_date_formatted}</p>
+            </Link>
           </li>
         ))}
       </ul>

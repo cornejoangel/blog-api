@@ -1,0 +1,24 @@
+@use 'base';
+
+.user-listing {
+  margin-top: 1rem;
+  padding: 1rem;
+
+  a {
+    color: base.$font-color;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 1.25rem;
+    background-color: base.$light-bg;
+    padding: 1rem;
+  }
+
+  a:hover {
+    background-color: base.$very-light-bg;
+  }
+
+  p {
+    display: inline;
+    font-weight: 300;
+  }
+}
