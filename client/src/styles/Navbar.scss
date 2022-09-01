@@ -1,41 +1,96 @@
 @use 'base';
 
 nav {
-  display: flex;
   border-bottom: 3px solid black;
-  font-size: 1.25rem;
-  justify-content: flex-end;
 
-  ul {
-    padding: 0;
-    margin: 0 1rem;
-  }
-
-  li {
-    margin: 1rem;
-  }
-
-  a {
-    text-decoration: none;
-    color: base.$font-color;
-    font-weight: 700;
-    padding: 5px;
-    border-radius: 5px;
-  }
-
-  a:hover {
-    background-color: base.$light-bg;
-  }
-
-  .links {
+  .nav-content {
     display: flex;
+    font-size: 1.25rem;
+    justify-content: flex-end;
+    transition: height .1s linear;
+
+    ul {
+      padding: 0;
+      margin: 0 1rem;
+    }
+
+    li {
+      margin: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: base.$font-color;
+      font-weight: 700;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: base.$light-bg;
+    }
+
+    .links {
+      display: flex;
+    }
+
+
+    .auth {
+      display: flex;
+    }
+
+    button {
+      margin: .5rem;
+    }
   }
 
+  .menu-button {
+    width: fit-content;
+    height: fit-content;
+    margin: 1rem !important;
+    padding: 0 5px !important;
+    font-weight: 400;
+    background-color: base.$medium-bg;
+  }
+
+  .nav-content.closed {
+    justify-content: flex-start;
+    height: 0;
+  }
+
+  .nav-content.open {
+    flex-direction: column;
+    height: 14rem;
+  }
+
+  .links.open,
+  .auth.open {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .links.closed,
+  .auth.closed {
+    display: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .menu-button {
+    display: none;
+  }
+
+  .nav-content {
+    justify-content: flex-end !important;
+    flex-direction: row !important;
+    background-color: white !important;
+    height: fit-content !important;
+  }
+
+  .links,
   .auth {
-    display: flex;
-  }
-
-  button {
-    margin: .5rem;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
   }
 }
