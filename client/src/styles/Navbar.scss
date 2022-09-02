@@ -81,8 +81,8 @@ nav {
   .menu-button {
     width: fit-content;
     height: fit-content;
-    margin: 1rem !important;
-    padding: 0 5px !important;
+    margin: 1rem;
+    padding: 0 5px;
     font-weight: 400;
     background-color: base.$medium-bg;
     font-size: 1.25rem;
@@ -114,28 +114,50 @@ nav {
   .logout.open {
     width: fit-content;
     height: fit-content;
-    margin: 1rem !important;
-    padding: 0 5px !important;
+    margin: 1rem;
+    padding: 0 5px;
     background-color: inherit;
   }
 }
 
 @media (min-width: 600px) {
-  nav {
+
+  nav.open,
+  nav.closed {
     position: sticky;
     background-color: base.$menu-bg;
     top: 0;
-    height: fit-content !important;
-    border-bottom: 3px solid black !important;
-  }
+    height: fit-content;
+    border-bottom: 3px solid black;
 
-  nav {
-    .nav-content {
+    .nav-content.open,
+    .nav-content.closed {
+      justify-content: flex-end;
+      flex-direction: row;
+      height: fit-content;
+
+      .links,
+      .auth {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 0;
+      }
 
       .logged.closed,
       .logged.open {
         display: inline;
         margin: 1rem;
+      }
+
+      .logout.open,
+      .logout.closed {
+        display: flex;
+        width: fit-content;
+        height: fit-content;
+        margin: 1rem;
+        padding: 0 5px;
+        background-color: inherit;
       }
     }
   }
@@ -144,31 +166,9 @@ nav {
     display: none;
   }
 
-  .nav-content {
-    justify-content: flex-end !important;
-    flex-direction: row !important;
-    height: fit-content !important;
-  }
-
-  .links,
-  .auth {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-end !important;
-    margin: 0 !important;
-  }
-
   .closed {
     display: flex;
     justify-content: flex-end;
   }
 
-  .logout {
-    display: flex !important;
-    width: fit-content;
-    height: fit-content;
-    margin: 1rem !important;
-    padding: 0 5px !important;
-    background-color: inherit;
-  }
 }
