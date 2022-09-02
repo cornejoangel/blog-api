@@ -22,5 +22,14 @@ CommentSchema.virtual('time_stamp_formatted').get(function () {
   );
 });
 
+CommentSchema.virtual('edit_time_formatted').get(function () {
+  if (this.edited) {
+    return DateTime.fromJSDate(this.edited_time).toLocaleString(
+      DateTime.DATETIME_SHORT_WITH_SECONDS
+    );
+  }
+  return false;
+});
+
 // Export model
 module.exports = mongoose.model('Comment', CommentSchema);
