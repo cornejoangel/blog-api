@@ -39,8 +39,9 @@ button:hover {
   flex-direction: column;
   padding: 1rem;
   border: 3px solid black;
-  max-width: 300px;
+  max-width: 250px;
   margin: 0 auto;
+  box-sizing: border-box;
 
   label {
     margin: 1rem;
