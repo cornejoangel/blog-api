@@ -60,7 +60,7 @@ const Navbar = (props) => {
           <button
             type="button"
             className={menuOpen ? 'logout open' : 'logout closed'}
-            onClick={(e) => logout(e)}
+            onClick={(e) => logoutHandler(e)}
           >
             Log out
           </button>
