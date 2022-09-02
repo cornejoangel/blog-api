@@ -15,6 +15,11 @@ const Navbar = (props) => {
     setMenuOpen(true);
   };
 
+  const logoutHandler = (e) => {
+    toggleMenu();
+    logout(e);
+  };
+
   return (
     <nav className={menuOpen ? 'open' : 'closed'}>
       <button
