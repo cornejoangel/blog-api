@@ -35,6 +35,23 @@ nav {
       margin: 1rem;
     }
 
+    .logged {
+      margin: 0;
+      font-weight: 300;
+      padding: 5px;
+      margin: 0;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .logged.closed {
+      display: none;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
     a {
       text-decoration: none;
       color: base.$font-color;
@@ -112,6 +129,17 @@ nav {
     border-bottom: 3px solid black !important;
   }
 
+  nav {
+    .nav-content {
+
+      .logged.closed,
+      .logged.open {
+        display: inline;
+        margin: 1rem;
+      }
+    }
+  }
+
   .menu-button {
     display: none;
   }
@@ -127,5 +155,20 @@ nav {
     display: flex !important;
     flex-direction: row !important;
     justify-content: flex-end !important;
+    margin: 0 !important;
+  }
+
+  .closed {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .logout {
+    display: flex !important;
+    width: fit-content;
+    height: fit-content;
+    margin: 1rem !important;
+    padding: 0 5px !important;
+    background-color: inherit;
   }
 }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/Navbar.scss';
 
 const Navbar = (props) => {
-  const { loggedIn, logout } = props;
+  const { loggedIn, logout, user } = props;
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -30,6 +30,11 @@ const Navbar = (props) => {
         {menuOpen ? 'Close' : 'Menu'}
       </button>
       <div className={menuOpen ? 'nav-content open' : 'nav-content closed'}>
+        {user !== null && (
+          <p className={menuOpen ? 'logged open' : 'logged closed'}>
+            Logged in as <strong>{user.username}</strong>
+          </p>
+        )}
         <ul className={menuOpen ? 'links open' : 'links closed'}>
           <li>
             <Link to="/" onClick={() => toggleMenu()}>
@@ -73,6 +78,7 @@ const Navbar = (props) => {
 Navbar.propTypes = {
   loggedIn: PropTypes.bool,
   logout: PropTypes.func,
+  user: PropTypes.object,
 };
 
 export default Navbar;

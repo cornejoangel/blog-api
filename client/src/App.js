@@ -55,7 +55,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Navbar loggedIn={loggedIn} logout={logout} />
+      <Navbar loggedIn={loggedIn} logout={logout} user={currentUser} />
       <Routes>
         <Route path="/" element={<Home user={currentUser} />} />
         <Route path="/signup" element={<Signup />} />
