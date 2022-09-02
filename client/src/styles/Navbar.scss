@@ -1,7 +1,24 @@
 @use 'base';
 
+nav.closed {
+  height: 10vh;
+}
+
+nav.open {
+  height: 100vh;
+  border: none;
+
+}
+
 nav {
+  background-color: base.$menu-bg;
   border-bottom: 3px solid black;
+  transition: all .1s linear;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 10vh;
+  z-index: 2;
 
   .nav-content {
     display: flex;
@@ -56,27 +73,45 @@ nav {
 
   .nav-content.closed {
     justify-content: flex-start;
-    height: 0;
+    height: 5vh;
   }
 
   .nav-content.open {
     flex-direction: column;
-    height: 14rem;
+    justify-content: flex-start;
   }
 
   .links.open,
-  .auth.open {
+  .auth.open,
+  .logout.open {
     flex-direction: column;
     margin: 0;
   }
 
   .links.closed,
-  .auth.closed {
+  .auth.closed,
+  .logout.closed {
     display: none;
+  }
+
+  .logout.open {
+    width: fit-content;
+    height: fit-content;
+    margin: 1rem !important;
+    padding: 0 5px !important;
+    background-color: inherit;
   }
 }
 
 @media (min-width: 600px) {
+  nav {
+    position: sticky;
+    background-color: base.$menu-bg;
+    top: 0;
+    height: fit-content !important;
+    border-bottom: 3px solid black !important;
+  }
+
   .menu-button {
     display: none;
   }
@@ -84,7 +119,6 @@ nav {
   .nav-content {
     justify-content: flex-end !important;
     flex-direction: row !important;
-    background-color: white !important;
     height: fit-content !important;
   }
 

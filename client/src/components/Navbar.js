@@ -16,7 +16,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <nav>
+    <nav className={menuOpen ? 'open' : 'closed'}>
       <button
         type="button"
         className="menu-button"
@@ -52,7 +52,11 @@ const Navbar = (props) => {
           </ul>
         )}
         {loggedIn && (
-          <button type="button" onClick={(e) => logout(e)}>
+          <button
+            type="button"
+            className={menuOpen ? 'logout open' : 'logout closed'}
+            onClick={(e) => logout(e)}
+          >
             Log out
           </button>
         )}
