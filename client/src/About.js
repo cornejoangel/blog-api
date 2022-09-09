@@ -1,4 +1,4 @@
-const About = (props) => (
+const About = () => (
   <div className="content">
     <h1>About</h1>
     <p>This site was created by Angel Cornejo.</p>
