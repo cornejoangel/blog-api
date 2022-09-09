@@ -42,6 +42,11 @@ const Navbar = (props) => {
             </Link>
           </li>
           <li>
+            <Link to="/about" onClick={() => toggleMenu()}>
+              About
+            </Link>
+          </li>
+          <li>
             <Link to="/users" onClick={() => toggleMenu()}>
               User List
             </Link>

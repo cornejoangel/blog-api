@@ -9,6 +9,7 @@ import CommentDetail from './CommentDetail';
 import UserDetail from './UserDetail';
 import UpdateUser from './UpdateUser';
 import Navbar from './components/Navbar';
+import About from './About';
 import './styles/App.scss';
 
 const App = () => {
@@ -80,6 +81,7 @@ const App = () => {
           element={<UserDetail currentUser={currentUser} logout={logout} />}
         />
         <Route path="/users/:id/update" element={<UpdateUser />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </div>
   );
