@@ -12,7 +12,7 @@ This project is a social media blog hybrid site developed by Angel Cornejo. It i
 2. Once you have an account you can login with the **Login** button.
 3. Logged in users can make a new post on the home page.
 4. Click on the **view post** link at the bottom of any page to go to the post's detail page.
-5. From the detail page of a post, logged in user's can leave a comment on the post.
+5. From the detail page of a post, logged in users can leave a comment on the post.
 6. The user who made the post can also edit it here, the timestamp will include the edit time.
 7. Clicking on the **comment count** link at the bottom of a comment takes you to the comment detail page, which is just like a post detail page.
 8. From here you can leave a comment on the comment or edit it if it is yours.
