@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
+const compression = require('compression');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -31,6 +32,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
