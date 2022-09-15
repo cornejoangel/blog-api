@@ -44,7 +44,7 @@ const PostForm = (props) => {
       <input type="text" name="title" value={title} onChange={handleChange} />
       <label htmlFor="body">Body:</label>
       <textarea name="body" value={body} onChange={handleChange} />
-      <div>
+      {/* <div>
         <label className="radio-label" htmlFor="public">
           <input
             type="radio"
@@ -67,7 +67,7 @@ const PostForm = (props) => {
           />
           Private
         </label>
-      </div>
+      </div> */}
       <button className="create-post" type="submit">
         {editing ? 'Update Post' : 'Create Post'}
       </button>
