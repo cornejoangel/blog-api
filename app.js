@@ -8,6 +8,7 @@ const logger = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
 const compression = require('compression');
+const helmet = require('helmet');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -28,6 +29,7 @@ mongoose.set('toJSON', { virtuals: true });
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
