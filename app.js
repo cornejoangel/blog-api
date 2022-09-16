@@ -36,6 +36,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, './client/build')));
+app.get('*', (request, response) => {
+  response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
