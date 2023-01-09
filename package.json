@@ -13,6 +13,11 @@
     "install-client": "cd client && npm install",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
+  "eslintConfig": {
+    "extends": [
+      "wesbos"
+    ]
+  },
   "dependencies": {
     "async": "^3.2.4",
     "bcryptjs": "^2.4.3",
@@ -44,7 +49,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^16.2.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-config-wesbos": "^3.0.2",
+    "eslint-config-wesbos": "^3.2.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.0",
