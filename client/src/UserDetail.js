@@ -91,13 +91,15 @@ const UserDetail = (props) => {
           </ul>
         </div>
       )}
-      {currentUser !== null && user !== null && currentUser._id === user._id && (
-        <Link to={`/users/${user._id}/update`}>
-          <button type="button" className="update-button">
-            Update User
-          </button>
-        </Link>
-      )}
+      {currentUser !== null &&
+        user !== null &&
+        currentUser._id === user._id && (
+          <Link to={`/users/${user._id}/update`}>
+            <button type="button" className="update-button">
+              Update User
+            </button>
+          </Link>
+        )}
       {currentUser !== null && user !== null && currentUser.admin && (
         <Link to={`/users/${user._id}/update`}>
           <button type="button" className="update-button">
@@ -105,11 +107,13 @@ const UserDetail = (props) => {
           </button>
         </Link>
       )}
-      {currentUser !== null && user !== null && currentUser._id === user._id && (
-        <button type="button" onClick={deleteToggle}>
-          {deleting ? 'Cancel' : 'Delete User'}
-        </button>
-      )}
+      {currentUser !== null &&
+        user !== null &&
+        currentUser._id === user._id && (
+          <button type="button" onClick={deleteToggle}>
+            {deleting ? 'Cancel' : 'Delete User'}
+          </button>
+        )}
       {currentUser !== null && user !== null && currentUser.admin && (
         <button type="button" onClick={deleteToggle}>
           {deleting ? 'Cancel' : 'Delete User'}
