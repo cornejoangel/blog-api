@@ -1,7 +1,7 @@
 # Social Media Blog
 This project is a social media blog hybrid site developed by Angel Cornejo. It is a MERN stack app styled with Sass.
 
-**[CHECK IT OUT LIVE HERE](https://cryptic-cove-57692.herokuapp.com/)**
+**[CHECK IT OUT LIVE HERE](https://social-blog.herokuapp.com/)**
 
 ## Features
 - Custom API implemented with Express.
