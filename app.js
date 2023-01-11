@@ -19,8 +19,12 @@ const commentsRouter = require('./routes/comments');
 const app = express();
 
 // Set up mongoose connection
-const mongoDB = process.env.MONGODB_URL;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoDB = process.env.MONGODB_URI;
+mongoose.connect(mongoDB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: 'blog_api',
+});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 mongoose.set('toJSON', { virtuals: true });
