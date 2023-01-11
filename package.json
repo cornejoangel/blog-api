@@ -2,7 +2,7 @@
   "name": "blog-api",
   "version": "0.0.0",
   "engines": {
-    "node": "16.13.0"
+    "node": "18.13.0"
   },
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "serverstart": "DEBUG=blog-api:* npm run devstart",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "dependencies": {
     "async": "^3.2.4",
